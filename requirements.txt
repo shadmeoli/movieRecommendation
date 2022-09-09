@@ -1,0 +1,4 @@
+customtkinter
+httpx
+fastapi
+uvicorn[standard]
