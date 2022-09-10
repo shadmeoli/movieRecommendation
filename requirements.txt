@@ -1,4 +1,10 @@
+# ui library
 customtkinter
-httpx
+# API and webhooks
 fastapi
 uvicorn[standard]
+httpx
+# machine learning libraries
+# pandas
+# numpy
+# sklearn

@@ -11,7 +11,7 @@ ctk.set_default_color_theme("blue")
 
 
 # main splash screen entry point
-class SignUp:
+class LogIn:
 
     # all splash screen constructor
     def __init__(self):
