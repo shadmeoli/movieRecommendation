@@ -24,6 +24,7 @@ class SplashScreen:
         self.app.geometry("900x600")
         self.app.title("in-watch")
 
+
         # splash image
         self.photo_1 = Image.open("/home/shad/Desktop/Binar Projects/movieRecommendation/assets/renders/Other 12.png")
         self.photo_2 = Image.open("/home/shad/Desktop/Binar Projects/movieRecommendation/assets/renders/Other 18.png")
@@ -73,6 +74,7 @@ class SplashScreen:
 
     # the first screen
     def screen1(self):
+
         self.render_photo = ImageTk.PhotoImage(self.photo_1)
 
         __image = self.image()
