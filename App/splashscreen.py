@@ -47,7 +47,7 @@ class SplashScreen:
 
         self.change()
     
-    def home(self):
+    def registering_new_user(self):
         print("Now in home")
 
     # changing screens
@@ -110,7 +110,7 @@ class SplashScreen:
         __movies = ctk.CTkLabel(self.app, text="Fast download and watch speed.")
         __movies.place(x=300, y=480)
 
-        __next=  ctk.CTkButton(text='Create Account', command=self.home)
+        __next=  ctk.CTkButton(text='Create Account', command=self.registering_new_user)
         __next.place(x=750, y=550)
 
         return __movies

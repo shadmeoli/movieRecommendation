@@ -8,3 +8,6 @@ httpx
 pandas
 numpy
 sklearn
+nltk
+nlp
+pillow

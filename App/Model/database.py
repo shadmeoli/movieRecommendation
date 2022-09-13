@@ -1,5 +1,5 @@
+
 import base64
-from errno import EEXIST
 import os
 import time
 import sqlite3
@@ -27,8 +27,35 @@ def crypt_detail(det) -> str:
 
     return encoded_pswd.hexdigest()
 
-# creating the database
+# mail validator
+def mail_validation(email: str):
 
+    # currently valid mails
+    mails = [
+        "@gmail.com",
+        "@zohomail.com",
+        "@yahoo.com",
+        "@protonmail.com"
+    ]
+
+    for mail in mails:
+        
+        mail_provider = email.endswith(mail)
+
+        try:
+
+            if mail_provider not in mails:
+                return False
+            elif mail_provider in mails and len(email) > 5:
+                return True
+
+            elif len(email) == 0:
+                return None
+
+        except:
+            return None
+
+# creating the database
 class Database:
 
     # creating new files
@@ -136,7 +163,10 @@ class DBWrite(Database):
 
         # creating the user database for new users
         con = sqlite3.connect("Model/downloads.db")
-        con.execute("INSERT INTO downloads(Movie_name, Genre, release_date) VALUES (?, ?, ?)", (Movie_name, Genre, release_date))
+        con.execute("""INSERT INTO downloads(Movie_name, Genre, release_date) 
+                    VALUES (?, ?, ?)""", 
+                    (Movie_name, Genre, release_date)
+                    )
 
         return con
     
@@ -147,7 +177,7 @@ class DBWrite(Database):
         con = sqlite3.connect("Model/archaive.db")
         con.execute("""
             INSERT INTO archaive(Movie_name, Genre, release_date)
-            VALUES (?, ?, ?, ?);
+            VALUES (?, ?, ?, ?)
         """, 
         (Movie_name, Genre, release_date))
 
@@ -171,9 +201,3 @@ class DBWrite(Database):
 class AppDetails:
     pass
 
-
-
-if __name__ == '__main__':
-    db = DBWrite()
-    db.create_new_files()
-    db.adding_users("Shadrack", "shadrackmeoli@gmail.com", "+254742909056", "Meoliminoo)*@)")
