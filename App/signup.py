@@ -1,9 +1,24 @@
+# all the imports
+import os
+import sys
+from datetime import datetime
+import time
+from random import randint
+
+# -- UI libraries
+from tkinter import *
+import tkinter as tk
+from tkinter import ttk
+import customtkinter as ctk
+from PIL import Image, ImageTk
+
+# API libraries
+from fastapi import *
+import httpx
 import customtkinter as ctk
 import tkinter as tk
-
-# calling the main library file 
-from BASE import *
-
+from tkinter import *
+from PIL import ImageTk, Image
 
 # ctk initilization
 ctk.set_appearance_mode("dark")

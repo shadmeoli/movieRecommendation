@@ -1,10 +1,27 @@
+# all the imports
+import os
+import sys
+from datetime import datetime
+import time
+from random import randint
+
+# -- UI libraries
+from tkinter import *
+import tkinter as tk
+from tkinter import ttk
+import customtkinter as ctk
+from PIL import Image, ImageTk
+
+# API libraries
+from fastapi import *
+import httpx
 import customtkinter as ctk
 import tkinter as tk
 from tkinter import *
 from PIL import ImageTk, Image
 
 # calling the main library file 
-from BASE import *
+from .BASE import *
 
 
 # ctk initilization
@@ -24,12 +41,9 @@ class SplashScreen:
         self.app.geometry("900x600")
         self.app.title("in-watch")
 
-
         # splash image
         self.photo_1 = Image.open("/home/shad/Desktop/Binar Projects/movieRecommendation/assets/renders/Other 12.png")
-        self.photo_2 = Image.open("/home/shad/Desktop/Binar Projects/movieRecommendation/assets/renders/Other 18.png")
-
-        
+        self.photo_2 = Image.open("/home/shad/Desktop/Binar Projects/movieRecommendation/assets/renders/Other 18.png") 
 
         self.change()
     
@@ -38,8 +52,7 @@ class SplashScreen:
 
     # changing screens
     def change(self):
-        # self.splash1 = self.screen1()
-        # self.splash2 = self.screen2()
+
         __first_screen = self.screen1()
         try:
             if self.screen == 1:
@@ -97,7 +110,7 @@ class SplashScreen:
         __movies = ctk.CTkLabel(self.app, text="Fast download and watch speed.")
         __movies.place(x=300, y=480)
 
-        __next=  ctk.CTkButton(text='START', command=self.home)
+        __next=  ctk.CTkButton(text='Create Account', command=self.home)
         __next.place(x=750, y=550)
 
         return __movies
@@ -105,8 +118,3 @@ class SplashScreen:
     # splash screen initilizer
     def run(self):
         return self.app.mainloop()
-
-# runner
-if __name__ == "__main__":
-    sp = SplashScreen()
-    sp.run()
