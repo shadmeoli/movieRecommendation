@@ -76,24 +76,24 @@ class SignUp:
         new_user_email.place(x=220, y=100) 
 
         # phone
-        __phone = ctk.CTkLabel(self.frame, text="username")
+        __phone = ctk.CTkLabel(self.frame, text="Phone")
         __phone.place(x=100, y=150)
 
         new_user_phone = ctk.CTkEntry(self.frame)
         new_user_phone.place(x=220, y=150) 
 
         # password
-        __password = ctk.CTkLabel(self.frame, text="username")
+        __password = ctk.CTkLabel(self.frame, text="password")
         __password.place(x=100, y=200)
 
-        new_user_password = ctk.CTkEntry(self.frame)
+        new_user_password = ctk.CTkEntry(self.frame, show="*")
         new_user_password.place(x=220, y=200) 
 
         # confirm password
-        __confirm = ctk.CTkLabel(self.frame, text="username")
+        __confirm = ctk.CTkLabel(self.frame, text="confirm")
         __confirm.place(x=100, y=250)
 
-        confirm_password = ctk.CTkEntry(self.frame)
+        confirm_password = ctk.CTkEntry(self.frame, show="*")
         confirm_password.place(x=220, y=250) 
 
         register = ctk.CTkButton(self.frame, text="SIGN UP", command=self.user_registration)

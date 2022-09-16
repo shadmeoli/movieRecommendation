@@ -30,16 +30,55 @@ class LogIn:
 
     # all splash screen constructor
     def __init__(self):
+
+        self.WIDTH, self.HEIGHT = 900, 600
         self.app = ctk.CTk()
-        self.app.geometry("900x600")
+        self.app.geometry(f"{self.WIDTH}x{self.HEIGHT}")
         self.app.title("in-watch")
 
-    def screen1(self):
-        pass
+        # frame
 
-    def screen2(self):
-        pass
+        self.frame = ctk.CTkFrame(master=self.app,
+                                       width=500,
+                                       height=400,
+                                       corner_radius=10)
+        self.frame.pack(padx=20, pady=100)
+        # initilizer
+        self.user_login()
+
+    # registering the new user
+    def user_login(self):
+        print("User registered")
+
+    def user_login(self):
+        
+        # getting user data
+        __company = ctk.CTkLabel(self.app, text="in-watch", text_font=("helvetica", 60))
+        __company.place(x=330, y=10)
+
+        # username
+        __name = ctk.CTkLabel(self.frame, text="username")
+        __name.place(x=100, y=100)
+
+        new_user_name = ctk.CTkEntry(self.frame)
+        new_user_name.place(x=220, y=100) 
+
+        # password
+        __password = ctk.CTkLabel(self.frame, text="password")
+        __password.place(x=100, y=150)
+
+        new_user_password = ctk.CTkEntry(self.frame, show="*")
+        new_user_password.place(x=220, y=150) 
+
+        register = ctk.CTkButton(self.frame, text="LOG IN", command=self.user_login)
+        register.place(x=190, y=200)
+
+
 
     # splash screen initilizer
     def run(self):
         return self.app.mainloop()
+
+if __name__  == "__main__":
+    sp = LogIn()
+    sp.run()
