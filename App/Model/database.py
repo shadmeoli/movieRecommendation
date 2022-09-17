@@ -1,6 +1,7 @@
 
 import base64
 import os
+import re
 import time
 import sqlite3
 import json
@@ -38,22 +39,24 @@ def mail_validation(email: str):
         "@protonmail.com"
     ]
 
-    for mail in mails:
-        
-        mail_provider = email.endswith(mail)
+    ind = 0
 
-        try:
 
-            if mail_provider not in mails:
-                return False
-            elif mail_provider in mails and len(email) > 5:
-                return True
+    # iterating thourgh out database in my case a list
+    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
-            elif len(email) == 0:
-                return None
+    if re.fullmatch(regex, email):
+        for i in range(len(mails)-1):
 
-        except:
-            return None
+            if email.endswith(mails[val]) == False:
+                print("not in main")
+                val += 1
+
+                if email.endswith(mails[val]) == True:
+                    val += 1
+                    print("Mail found")
+                    break
+
 
 # creating the database
 class Database:
@@ -84,7 +87,7 @@ class Database:
             con.execute("""
                 CREATE TABLE Download_list(
                     id INTEGER PRIMARY KEY,
-                    Movie_name VACHAR(500),
+                    Movie_name VARCHAR(500),
                     Genre VARCHAR(500),
                     Release_date DATETIME   
                 )
@@ -98,7 +101,7 @@ class Database:
             con.execute("""
                 CREATE TABLE Download_list(
                     id INTEGER PRIMARY KEY,
-                    Movie_name VACHAR(500)   
+                    Movie_name VARCHAR(500)   
                 )
             """)
             return con
@@ -109,7 +112,7 @@ class Database:
             con = sqlite3.connect("Model/inWatch_users.db")
             con.execute("""CREATE TABLE AllUsers(
                 id INTEGER PRIMARY KEY,
-                name VACHAR(500) NOT NULL UNIQUE,
+                name VARCHAR(500) NOT NULL UNIQUE,
                 email TEXT NOT NULL UNIQUE,
                 phone TEXT NOT NULL UNIQUE,
                 password TEXT NOT NULL UNIQUE
@@ -200,4 +203,3 @@ class DBWrite(Database):
 # getting the user data from the APP
 class AppDetails:
     pass
-

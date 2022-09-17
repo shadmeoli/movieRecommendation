@@ -17,8 +17,9 @@ from fastapi import *
 import httpx
 
 # database library
-
-
+from Model import *
+from Mode.database import *
+from Model.API import * 
 
 # custom hex colours
 _theme = {
