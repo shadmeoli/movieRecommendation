@@ -18,7 +18,7 @@ import httpx
 
 # database library
 from Model import *
-from Mode.database import *
+from Model.database import *
 from Model.API import * 
 
 # custom hex colours

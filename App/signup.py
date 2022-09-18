@@ -8,6 +8,7 @@ from random import randint
 # -- UI libraries
 from tkinter import *
 import tkinter as tk
+from tkinter import messagebox, scrolledtext, ttk, simpledialog
 from tkinter import ttk
 import customtkinter as ctk
 from PIL import Image, ImageTk
@@ -24,10 +25,12 @@ from PIL import ImageTk, Image
 # pages and custom renders
 from login import LogIn
 from BASE import *
+from Model.database import *
 
 # ctk initilization
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
+
 
 
 # main splash screen entry point
@@ -54,7 +57,7 @@ class SignUp(tk.Tk):
 
 
     def reset_password(self):
-        name = str(_user_name.get())
+        name = str(self._user_name.get())
         print("Password reset for: {}".format(name))
         # initilizer
         self.user_signup()
@@ -68,15 +71,16 @@ class SignUp(tk.Tk):
     def user_registration(self):
         
        # reacing from the user form input
-        name = str(new_user_name.get())
-        email = str(new_user_email.get())
-        phone = str(new_user_phone.get())
-        password = str(new_user_password.get())
+        # name = str(self.new_user_name.get())
+        # email = str(self.new_user_email.get())
+        # phone = str(self.new_user_phone.get())
+        # password = str(self.new_user_password.get())
 
         # inserting values to the db database
-        # attaching from the database file
-          
-
+        # attaching from the database file but validating the mail first
+        # add_user = DBWrite()
+        # add_user.adding_users(name, email, phone, password)
+        # print(name, email, phone, password)
 
     def user_signup(self):
         

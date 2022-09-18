@@ -31,31 +31,13 @@ def crypt_detail(det) -> str:
 # mail validator
 def mail_validation(email: str):
 
-    # currently valid mails
-    mails = [
-        "@gmail.com",
-        "@zohomail.com",
-        "@yahoo.com",
-        "@protonmail.com"
-    ]
-
-    ind = 0
-
-
     # iterating thourgh out database in my case a list
     regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
     if re.fullmatch(regex, email):
-        for i in range(len(mails)-1):
-
-            if email.endswith(mails[val]) == False:
-                print("not in main")
-                val += 1
-
-                if email.endswith(mails[val]) == True:
-                    val += 1
-                    print("Mail found")
-                    break
+        return True
+    else:
+        return False
 
 
 # creating the database
@@ -77,7 +59,7 @@ class Database:
             """)
             try:
                 return con
-            except EEXIST:
+            except:
                 console.print("Database already exist", style="bold red")
         
         def downloads():
@@ -140,25 +122,29 @@ class Database:
     
 # writing data
 
-class DBWrite(Database):
+class DBWrite:
 
     # adding new users
     def adding_users(self, 
         name, email: str, phone, password
         ):
 
-        # hasing the password
-        Password = crypt_detail(str(password))
+        if mail_validation(email):
 
-        # creating the user database for new users
-        con = sqlite3.connect("Model/inWatch_users.db")
+            # hasing the password
+            Password = crypt_detail(str(password))
 
-        try:
-            con.execute("INSERT INTO AllUsers(name, email, phone, password)VALUES ('{}', '{}', '{}', '{}')".format(name, email, phone, Password))
-            con.commit()
-            return con
-        except sqlite3.IntegrityError as e:
-            return "User exists"
+            # creating the user database for new users
+            con = sqlite3.connect("Model/inWatch_users.db")
+
+            try:
+                con.execute("INSERT INTO AllUsers(name, email, phone, password)VALUES ('{}', '{}', '{}', '{}')".format(name, email, phone, Password))
+                con.commit()
+                return con
+            except sqlite3.IntegrityError as e:
+                return "User exists"
+        else:
+            return "Invalid email"
 
 
     # adding into  download
