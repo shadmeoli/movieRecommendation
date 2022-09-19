@@ -161,7 +161,7 @@ class DBWrite:
     def archive(self, Movie_name, Genre, release_date):
 
         # creating the user database for new users
-        con = sqlite3.connect("App/Model/archaive.db")
+        con = sqlite3.connect("archaive.db")
         con.execute("""
             INSERT INTO archaive(Movie_name, Genre, release_date)
             VALUES (?, ?, ?, ?)
@@ -173,7 +173,7 @@ class DBWrite:
     # adding to 
     def watchList(self, Movie_name):
         
-        con = sqlite3.connect("App/Model/watch_list.db")
+        con = sqlite3.connect("watch_list.db")
         con.execute("""
             INSERT INTO watch_list(
                 id INTEGER PRIMARY KEY,
@@ -191,8 +191,11 @@ class UserDetails:
     # cheack user
     def in_database(self, user_login_option, password): # if the password entered by use matches the database we approve the user
 
+        # hash the new entered password to compare the hashes
+        entered_password = crypt_detail(password)
+
         # getting passwords,username and email
-        conn = sqlite3.connect("App/Model/inWatch_users.db")
+        conn = sqlite3.connect("inWatch_users.db")
 
         # runnung queries depending on the way the user wants to login either by email or password
         if is_mail(user_login_option):
@@ -201,19 +204,23 @@ class UserDetails:
 
             password_in_db = data[0][0]
 
-            if password != password_in_db:
-                return False
-            else:
+            if entered_password == password_in_db:
                 return True
+            elif entered_password != password_in_db:
+                return False
 
         else:
             cursor = conn.execute(f"SELECT password FROM AllUsers WHERE name='{user_login_option}'")
        
             data = cursor.fetchall()
 
-            # password_in_db = data
+            password_in_db = data[0][0]
 
-            if password != data:
-                return False
-            else:
+            if entered_password == password_in_db:
                 return True
+            elif entered_password != password_in_db:
+                return False
+
+# if __name__ == '__main__':
+#     use_det = UserDetails()
+#     print(use_det.in_database("stacy", "mino"))
