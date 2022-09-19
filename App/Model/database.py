@@ -195,7 +195,7 @@ class UserDetails:
         entered_password = crypt_detail(password)
 
         # getting passwords,username and email
-        conn = sqlite3.connect("inWatch_users.db")
+        conn = sqlite3.connect("Model/inWatch_users.db")
 
         # runnung queries depending on the way the user wants to login either by email or password
         if is_mail(user_login_option):
@@ -221,6 +221,6 @@ class UserDetails:
             elif entered_password != password_in_db:
                 return False
 
-# if __name__ == '__main__':
-#     use_det = UserDetails()
-#     print(use_det.in_database("stacy", "mino"))
+if __name__ == '__main__':
+    use_det = UserDetails()
+    print(use_det.in_database("stacy", "minoo"))
