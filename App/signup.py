@@ -34,7 +34,7 @@ ctk.set_default_color_theme("dark-blue")
 
 
 # main splash screen entry point
-class SignUp(tk.Tk):
+class SignUp:
 
     # all splash screen constructor
     def __init__(self):
@@ -71,16 +71,17 @@ class SignUp(tk.Tk):
     def user_registration(self):
         
        # reacing from the user form input
-        # name = str(self.new_user_name.get())
-        # email = str(self.new_user_email.get())
-        # phone = str(self.new_user_phone.get())
-        # password = str(self.new_user_password.get())
+        name = str(self.new_user_name.get())
+        email = str(self.new_user_email.get())
+        phone = str(self.new_user_phone.get())
+        password = str(self.new_user_password.get())
 
         # inserting values to the db database
         # attaching from the database file but validating the mail first
-        # add_user = DBWrite()
-        # add_user.adding_users(name, email, phone, password)
-        # print(name, email, phone, password)
+        add_user = DBWrite()
+        add_user.adding_users(name, email, phone, password)
+
+        return True
 
     def user_signup(self):
         
@@ -92,37 +93,37 @@ class SignUp(tk.Tk):
         __name = ctk.CTkLabel(self.frame, text="username")
         __name.place(x=100, y=50)
 
-        new_user_name = ctk.CTkEntry(self.frame, placeholder_text="username")
-        new_user_name.place(x=220, y=50) 
+        self.new_user_name = ctk.CTkEntry(self.frame, placeholder_text="username")
+        self.new_user_name.place(x=220, y=50) 
 
         # getting user data
         # email
         __email = ctk.CTkLabel(self.frame, text="email")
         __email.place(x=100, y=100)
 
-        new_user_email = ctk.CTkEntry(self.frame, placeholder_text="email")
-        new_user_email.place(x=220, y=100) 
+        self.new_user_email = ctk.CTkEntry(self.frame, placeholder_text="email")
+        self.new_user_email.place(x=220, y=100) 
 
         # phone
         __phone = ctk.CTkLabel(self.frame, text="Phone")
         __phone.place(x=100, y=150)
 
-        new_user_phone = ctk.CTkEntry(self.frame, placeholder_text="phone number")
-        new_user_phone.place(x=220, y=150) 
+        self.new_user_phone = ctk.CTkEntry(self.frame, placeholder_text="phone number")
+        self.new_user_phone.place(x=220, y=150) 
 
         # password
         __password = ctk.CTkLabel(self.frame, text="password")
         __password.place(x=100, y=200)
 
-        new_user_password = ctk.CTkEntry(self.frame, placeholder_text="password", show="*")
-        new_user_password.place(x=220, y=200) 
+        self.new_user_password = ctk.CTkEntry(self.frame, placeholder_text="password", show="*")
+        self.new_user_password.place(x=220, y=200) 
 
         # confirm password
         __confirm = ctk.CTkLabel(self.frame, text="confirm")
         __confirm.place(x=100, y=250)
 
-        confirm_password = ctk.CTkEntry(self.frame, placeholder_text="confirm password", show="*")
-        confirm_password.place(x=220, y=250) 
+        self.confirm_password = ctk.CTkEntry(self.frame, placeholder_text="confirm password", show="*")
+        self.confirm_password.place(x=220, y=250) 
 
         register = ctk.CTkButton(self.frame, text="SIGN UP", command=self.user_registration)
         register.place(x=190, y=330)
@@ -139,7 +140,6 @@ class SignUp(tk.Tk):
     # splash screen initilizer
     def run(self):
         return self.app.mainloop()
-
 
 # estup 
 if __name__  == "__main__":

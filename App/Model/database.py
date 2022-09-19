@@ -23,13 +23,13 @@ app = typer.Typer()
 # excrypting the passwords and any sensitive data
 def crypt_detail(det) -> str:
 
-    encoded_pswd = hashlib.sha265()
+    encoded_pswd = hashlib.sha256()
     encoded_pswd.update(det.encode())
 
     return encoded_pswd.hexdigest()
 
 # mail validator
-def mail_validation(email: str):
+def is_mail(email: str):
 
     # iterating thourgh out database in my case a list
     regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -48,7 +48,7 @@ class Database:
         
         def archive():
             
-            con = sqlite3.connect("Model/archaive.db")
+            con = sqlite3.connect("App/Model/archaive.db")
 
             con.execute("""
                 CREATE TABLE Download_list(
@@ -64,7 +64,7 @@ class Database:
         
         def downloads():
             
-            con = sqlite3.connect("Model/downloads.db")
+            con = sqlite3.connect("App/Model/downloads.db")
 
             con.execute("""
                 CREATE TABLE Download_list(
@@ -78,7 +78,7 @@ class Database:
         
         def watch_list():
             
-            con = sqlite3.connect("Model/watch_list.db")
+            con = sqlite3.connect("App/Model/watch_list.db")
 
             con.execute("""
                 CREATE TABLE Download_list(
@@ -91,7 +91,7 @@ class Database:
         # creating a user data database
         def users():
 
-            con = sqlite3.connect("Model/inWatch_users.db")
+            con = sqlite3.connect("App/Model/inWatch_users.db")
             con.execute("""CREATE TABLE AllUsers(
                 id INTEGER PRIMARY KEY,
                 name VARCHAR(500) NOT NULL UNIQUE,
@@ -103,7 +103,6 @@ class Database:
         
         try:
             # initilizing the files
-            dbs = ["Archaive", "Downloads", "Watch list", "users"]
             
             with Progress(SpinnerColumn(),TextColumn("[progress.description]{task.description}"),transient=True,) as progress:
                 progress.add_task(description="Creating database files...", total=100)
@@ -117,7 +116,6 @@ class Database:
             console.log(f"[bold red]{e}[/bold red]")
 
     def __str__(self) -> str:
-        exist = Table()
         console.print("-- Database actions Runnig --", new_line_start=True, style="green")
     
 # writing data
@@ -129,13 +127,13 @@ class DBWrite:
         name, email: str, phone, password
         ):
 
-        if mail_validation(email):
+        if is_mail(email):
 
             # hasing the password
             Password = crypt_detail(str(password))
 
             # creating the user database for new users
-            con = sqlite3.connect("Model/inWatch_users.db")
+            con = sqlite3.connect("App/Model/inWatch_users.db")
 
             try:
                 con.execute("INSERT INTO AllUsers(name, email, phone, password)VALUES ('{}', '{}', '{}', '{}')".format(name, email, phone, Password))
@@ -151,7 +149,7 @@ class DBWrite:
     def downloads(self, Movie_name, Genre, release_date):
 
         # creating the user database for new users
-        con = sqlite3.connect("Model/downloads.db")
+        con = sqlite3.connect("App/Model/downloads.db")
         con.execute("""INSERT INTO downloads(Movie_name, Genre, release_date) 
                     VALUES (?, ?, ?)""", 
                     (Movie_name, Genre, release_date)
@@ -163,7 +161,7 @@ class DBWrite:
     def archive(self, Movie_name, Genre, release_date):
 
         # creating the user database for new users
-        con = sqlite3.connect("Model/archaive.db")
+        con = sqlite3.connect("App/Model/archaive.db")
         con.execute("""
             INSERT INTO archaive(Movie_name, Genre, release_date)
             VALUES (?, ?, ?, ?)
@@ -175,7 +173,7 @@ class DBWrite:
     # adding to 
     def watchList(self, Movie_name):
         
-        con = sqlite3.connect("Model/watch_list.db")
+        con = sqlite3.connect("App/Model/watch_list.db")
         con.execute("""
             INSERT INTO watch_list(
                 id INTEGER PRIMARY KEY,
@@ -187,5 +185,35 @@ class DBWrite:
         return con
 
 # getting the user data from the APP
-class AppDetails:
-    pass
+class UserDetails:
+
+
+    # cheack user
+    def in_database(self, user_login_option, password): # if the password entered by use matches the database we approve the user
+
+        # getting passwords,username and email
+        conn = sqlite3.connect("App/Model/inWatch_users.db")
+
+        # runnung queries depending on the way the user wants to login either by email or password
+        if is_mail(user_login_option):
+            cursor = conn.execute(f"SELECT password FROM AllUsers WHERE email='{user_login_option}'")
+            data = cursor.fetchall()
+
+            password_in_db = data[0][0]
+
+            if password != password_in_db:
+                return False
+            else:
+                return True
+
+        else:
+            cursor = conn.execute(f"SELECT password FROM AllUsers WHERE name='{user_login_option}'")
+       
+            data = cursor.fetchall()
+
+            # password_in_db = data
+
+            if password != data:
+                return False
+            else:
+                return True
