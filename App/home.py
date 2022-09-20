@@ -1,4 +1,5 @@
 # all the imports
+from ast import Pass
 import os
 import sys
 from datetime import datetime
@@ -34,10 +35,26 @@ class Home:
         self.app.geometry("900x600")
         self.app.title("in-watch")
 
-    def screen1(self):
+        # container frames for the different pages
+        self.pages_frame = ctk.CTkFrame(master=self.app,
+                                       width=900,
+                                       height=600)
+        self.pages_frame.pack(padx=20, pady=100)
+    
+    # where to display all the movies and 
+    def main_screen(self):
         pass
 
-    def screen2(self):
+    # all archaived movies
+    def archaives(self):
+        pass
+
+    # the list of downloaded movies
+    def downloads(self):
+        pass
+
+    # movies added on the watch
+    def waiting_list(self):
         pass
 
     # splash screen initilizer
