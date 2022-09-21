@@ -118,3 +118,5 @@ class SplashScreen:
     # splash screen initilizer
     def run(self):
         return self.app.mainloop()
+
+
