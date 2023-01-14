@@ -2,6 +2,9 @@
 A desktop app for movie recommendation and download.
 
 
+![](https://badgen.net/badge/to/note/red) 
+> If you are using windows remove the 3 after every pip and python command, but if you are on mac or linux you can use with the 3 prefix
+
 #### Technologies Used
 > Python | Customtkinter & tkinter |
 
@@ -37,4 +40,5 @@ cd App
 ```
 python3 app.py
 ```
+
 
