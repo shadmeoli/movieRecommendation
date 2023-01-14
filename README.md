@@ -19,7 +19,22 @@ I in the requiremetns file you will find all the used libraries and the specific
 To install them run
 
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
-> after the installation run the ```main.py`` file 
+> after the installation run the ```main.py``` file  by runing the command
+
+```
+pyhton3 App/main.py
+```
+if that dosen't work run the following
+
+###### Navigate to the App folder
+```
+cd App
+```
+
+###### Then now run the main.py file
+```
+python3 app.py
+```
 
