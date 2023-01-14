@@ -24,21 +24,9 @@ To install them run
 ```
 pip3 install -r requirements.txt
 ```
-> after the installation run the ```main.py``` file  by runing the command
+> after the installation run the ```setup.py``` file  by runing the command
 
 ```
-pyhton3 App/main.py
+pyhton3 setup.py
 ```
-if that dosen't work run the following
-
-###### Navigate to the App folder
-```
-cd App
-```
-
-###### Then now run the main.py file
-```
-python3 app.py
-```
-
 
